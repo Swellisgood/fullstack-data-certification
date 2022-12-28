@@ -2,9 +2,9 @@
 # Bloc 2 : [Exploratory, Descriptive & Inferential Data Analysis ]
 ---
 
-EL MOUSADDEQ Souhail 
+## EL MOUSADDEQ Souhail 
 
-Certification FullStack Data Scientist
+### Certification FullStack Data Scientist
 
 email : swellisgood@gmail.com
 
