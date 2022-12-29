@@ -1,2 +1,5 @@
 venv
 secret.cfg
+openWeather_APIkey.txt
+AWSsettings.txt
+login_info.txt
