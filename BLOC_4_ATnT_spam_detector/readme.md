@@ -10,7 +10,8 @@ email : swellisgood@gmail.com
 
 Video link :
 
-Part 1 : https://share.vidyard.com/watch/wguWeAH7MevuAkyKCY9CVz? - Dernière minute de la vidéo audio corrompu, voire 2e vidéo pour partie finale merci de votre compréhension
+Part 1 : https://share.vidyard.com/watch/wguWeAH7MevuAkyKCY9CVz? -
+(Dernière minute de la vidéo audio corrompu, voire 2e vidéo pour partie finale merci de votre compréhension)
 Part 2 : https://share.vidyard.com/watch/tFnSwUVbbeyHs5L1TLmN4U?
 
 ---
