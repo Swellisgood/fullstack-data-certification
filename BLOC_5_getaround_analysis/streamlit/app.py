@@ -22,6 +22,18 @@ st.title("GetAround Analysis Dashboard ")
 
 st.image("https://lever-client-logos.s3.amazonaws.com/2bd4cdf9-37f2-497f-9096-c2793296a75f-1568844229943.png")
 
+### Side bar 
+st.sidebar.header("GetAround Analysis 🚗🚗")
+st.sidebar.markdown("""
+    * [Load and showcase data](#load-and-showcase-data)
+    * [Basic Statistics about dataset](#basic-statistics-about-dataset)
+    * [How long should the minimum delay be ?](#how-long-should-the-minimum-delay-be)
+""")
+e = st.sidebar.empty()
+e.write("")
+st.sidebar.write("by [Swellisgood](https://github.com/Swellisgood/fullstack-data-certification/tree/main/BLOC_5_getaround_analysis)")
+
+
 st.markdown("""
     Hello there ! 👋
     Context
@@ -66,11 +78,7 @@ if col1.checkbox('Show raw data'):
     col1.header('- [Delay Analysis](https://full-stack-assets.s3.eu-west-3.amazonaws.com/Deployment/get_around_delay_analysis.xlsx) 👈 Original Data')
     col1.write(data)
 
-col1.caption('a caption')
-
-col2.write("This is column 2")
-col2.text('Load data ...')
-
+col1.caption('This dataset have been cleaned from outliers and preprocessed in order to be used for this analysis.')
 with col2:
     df_pricing = pd.read_csv("./df_pricing.csv")
     fig = plt.figure()
@@ -257,6 +265,8 @@ ax[0].axvline(x=120, color='r', linestyle='--')
 ax[0].axvline(x=180, color='r', linestyle='--')
 st.pyplot(fig)
 
+st.markdown('We can see that the curve of cases solved start to slow significantly after 165 minutes and even more around 180 (which is actually a plateau for Connect cases). Therefore our recommendation would be to implement the threshold at 165 minutes and no more than 180.')
+
 data = data.dropna(subset=["time_delta_with_previous_rental_in_minutes", "delay_at_checkout_in_minutes"])
 data_test = pd.melt(data, id_vars=['car_id', 'rental_id', 'state', 'checkin_type'], value_vars=['time_delta_with_previous_rental_in_minutes', 'delay_at_checkout_in_minutes'])
 
@@ -271,6 +281,7 @@ fig6 = px.ecdf(
     color_discrete_sequence=[ "#BE6E46", "#7286A0"],
     labels={"value":'threshold (minutes)', "percent":'proportion of users (%)'}
     )
+fig6.add_vline(x=165, line_dash="dash", line_color="red", line_width=2, annotation_text="Threshold 165 min")
 
 fig7 = px.ecdf(
     data_test[data_test['checkin_type']=='connect'],
@@ -281,6 +292,7 @@ fig7 = px.ecdf(
     color_discrete_sequence=[ "#BE6E46", "#7286A0"],
     labels={"value":'threshold (minutes)', "percent":'proportion of users (%)'}
     )
+fig7.add_vline(x=165, line_dash="dash", line_color="red", line_width=2, annotation_text="Threshold 165 min")
 
 st.metric(label="Total number of Cars", value=data_test['car_id'].nunique())
 col1, col2 = st.columns(2)
@@ -295,24 +307,13 @@ with col2:
 
 
 st.markdown("These plots are Cumulative Distribution Function (ECDF), it allow us to show the percentage of users impacted by the introduction of a threshold for minimum time delay")
-st.markdown("The blue line represents the time between two rentals, the orange line represents the delay at checkout."
-            "we can see that at a threshold of 165 minutes, We retain around 90 % of the users on both platforms and their subsequent rental is on time."
+st.markdown("we can see that at a threshold of 165 minutes, We retain around 90 % of the users on both platforms and their subsequent rental is on time."
             "The return delay impacts the pick-up time in a proportional way and accumulates gradually.")
-st.markdown("The threshold sould be lower for connect cars because there is much less late return. Some more data around user experience would be needed to make a better decision and fine tune this recommendation.")
+st.markdown("The threshold sould be lower for connect cars because there is much less late return. Some more data around user experience would be needed (to know if these rentals were canceled due to the late previous checkout or for another reason) in order to make a better decision and fine tune this recommendation.")
 
 st.markdown("---")
 
 st.markdown("---")
-### Side bar 
-st.sidebar.header("GetAround Analysis 🚗🚗🚗")
-st.sidebar.markdown("""
-    * [Load and showcase data](#load-and-showcase-data)
-    * [Basic Statistics about dataset](#basic-statistics-about-dataset)
-    * [How long should the minimum delay be ?](#how-long-should-the-minimum-delay-be)
-""")
-e = st.sidebar.empty()
-e.write("")
-st.sidebar.write("by [Swellisgood](https://github.com/Swellisgood/fullstack-data-certification/tree/main/BLOC_5_getaround_analysis)")
 
 ### Footer 
 empty_space, footer = st.columns([1, 2])
