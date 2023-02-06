@@ -15,6 +15,6 @@ GetAround is the Airbnb for cars. You can rent cars from any person for a few ho
 
 The purpose of this project is to :
 
-1 - Build a dashboard that will allow a business team to determine optimal delay between rentals with Streamlit and Heroku ! : [Web Dashboard Analysis]()
+1 - Build a dashboard that will allow a business team to determine optimal delay between rentals with Streamlit and Heroku ! : [Web Dashboard Analysis](https://getaround-dash-swel.herokuapp.com/)
 
-2 - Documented online API that will allow users to optimize rental pricing using 'XGBR', FastAPI and Heroku ! : [Price Prediction (FastAPI) ](https://fastapi-swel.herokuapp.com/docs)
+2 - Documented online API that will allow users to optimize rental pricing using 'XGBR', FastAPI and Heroku ! : [Price Prediction (FastAPI)](https://fastapi-swel.herokuapp.com/docs)
