@@ -1,0 +1,14 @@
+fastapi 
+uvicorn[standard]
+pydantic 
+typing 
+pandas 
+gunicorn 
+openpyxl 
+sklearn
+python-multipart
+fsspec
+s3fs
+joblib
+scikit-learn==1.0.2
+xgboost==1.6.2
