@@ -139,7 +139,7 @@ async def predict(features:Features):
     "winter_tires": true
     }
 
-    Should return : "prediction": 143.557057416081
+    Should return : "prediction": 156.3555450439453
 
     All entries are case sensitive. List of possible values for categorical columns are available in the /unique-values endpoint.
     Wrong values will return a specific error message."""
