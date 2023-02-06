@@ -8,36 +8,33 @@ import pandas as pd
 
 app = FastAPI(
 title="Getaround API",
-description="""
-            You can use this API to estimate the rental price of a car.
-            The API is based on a dataset of cars from Getaround.
-            The dataset contains 10,000 rows and 9 columns.
-
-            The columns are:
-            - `model_key`: the brand of the car (Toyota, BMW, Ford, etc.)
-            - `mileage`: the mileage of the car (in km)
-            - `engine_power`: the engine power of the car (in horse power)
-            - `fuel`: the fuel type of the car (includes diesel, petrol, hybrid, electric)
-            - `paint_color`: the color of the car
-            - `car_type`: the type of car (includes sedan, hatchback, suv, van, estate, convertible, coupe, subcompact)
-            - `private_parking_available`: whether the car has a private parking or not (boolean)
-            - `has_gps`: whether the car has a GPS or not (boolean)
-            - `has_air_conditioning`: whether the car has air conditioning or not (boolean)
-            - `automatic_car`: whether the car is automatic or not (boolean)
-            - `has_getaround_connect`: whether the car has Getaround Connect or not (boolean)
-            - `has_speed_regulator`: whether the car has a speed regulator or not (boolean)
-            - `winter_tires`: whether the car has winter tires or not (boolean)
-            - `rental_price_per_day`: the rental price of the car (in $)
-
-            The API has 6 endpoints:
-            - **/preview**: returns a preview of the dataset (as a dictionary)
-            - **/predict**: returns the predicted price of a car
-            - **/unique-values**: returns the unique values of a column (as a list)
-            - **/groupby**: returns the grouped data of a column (as a dictionary)
-            - **/filter-by**: returns the filtered data of a column (as a dictionary)
-            - **/quantile**: returns the quantile of a column (as a float or string)
-            Based on the FastAPI framework.
-            """
+description="""You can use this API to estimate the rental price of a car.
+The API is based on a dataset of cars from Getaround.
+The dataset contains 10,000 rows and 9 columns.
+The columns are:
+- `model_key`: the brand of the car (Toyota, BMW, Ford, etc.)
+- `mileage`: the mileage of the car (in km)
+- `engine_power`: the engine power of the car (in horse power)
+- `fuel`: the fuel type of the car (includes diesel, petrol, hybrid, electric)
+- `paint_color`: the color of the car
+- `car_type`: the type of car (includes sedan, hatchback, suv, van, estate, convertible, coupe, subcompact)
+- `private_parking_available`: whether the car has a private parking or not (boolean)
+- `has_gps`: whether the car has a GPS or not (boolean)
+- `has_air_conditioning`: whether the car has air conditioning or not (boolean)
+- `automatic_car`: whether the car is automatic or not (boolean)
+- `has_getaround_connect`: whether the car has Getaround Connect or not (boolean)
+- `has_speed_regulator`: whether the car has a speed regulator or not (boolean)
+- `winter_tires`: whether the car has winter tires or not (boolean)
+- `rental_price_per_day`: the rental price of the car (in $)
+The API has 6 endpoints:
+- **/preview**: returns a preview of the dataset (as a dictionary)
+- **/predict**: returns the predicted price of a car
+- **/unique-values**: returns the unique values of a column (as a list)
+- **/groupby**: returns the grouped data of a column (as a dictionary)
+- **/filter-by**: returns the filtered data of a column (as a dictionary)
+- **/quantile**: returns the quantile of a column (as a float or string)
+The API is based on the FastAPI framework.
+"""
 
 )
 
@@ -48,7 +45,7 @@ async def root():
 
 
 
-# Required inputs for the prediction endpoint
+# Defining required input for the prediction endpoint
 class Features(BaseModel):
     model_key: str
     mileage: Union[int, float]
@@ -65,7 +62,7 @@ class Features(BaseModel):
     winter_tires: bool
 
 
-# handling errors for all columns except boolean types
+# catching errors for all columns except booleans
     @validator('model_key')
     def model_key_must_be_valid(cls, v):
         assert v in ['Citroën', 'Peugeot', 'PGO', 'Renault', 'Audi', 'BMW', 'Ford',
@@ -108,25 +105,25 @@ class Features(BaseModel):
 @app.post("/predict")
 async def predict(features:Features):
     """Get the predicted price of a car. 
-        Example input:
-        {
-                                "model_key" : "Peugeot",
-                                "mileage" : 14699,
-                                "engine_power" : 100,
-                                "fuel" : 0,
-                                "paint_color" : "black",
-                                "car_type" : "sedan",
-                                "private_parking_available" : False,
-                                "has_gps" : True,
-                                "has_air_conditioning" : False,
-                                "automatic_car" : False,
-                                "has_getaround_connect" : False,
-                                "has_speed_regulator" : True,
-                                "winter_tires" : True
-                                }
-        Should return : "prediction": 140.977348124938
-        All entries are case sensitive. List of possible values for categorical columns are available in the /unique-values endpoint.
-        Wrong values will return a specific error message."""
+Example of input:
+{
+  "model_key": "Toyota",
+  "mileage": 25000,
+  "engine_power": 130,
+  "fuel": "diesel",
+  "paint_color": "red",
+  "car_type": "sedan",
+  "private_parking_available": true,
+  "has_gps": true,
+  "has_air_conditioning": true,
+  "automatic_car": false,
+  "has_getaround_connect": true,
+  "has_speed_regulator": true,
+  "winter_tires": true
+}
+Should return : "prediction": 143.557057416081
+All entries are case sensitive. List of possible values for categorical columns are available in the /unique-values endpoint.
+Wrong values will return a specific error message."""
 
     features = dict(features)
     input_df = pd.DataFrame(columns=['model_key', 'mileage', 'engine_power', 'fuel', 'paint_color','car_type', 'private_parking_available', 'has_gps',
@@ -141,6 +138,7 @@ async def predict(features:Features):
 
 
 # Endpoints to explore the dataset
+
 @app.get("/preview")
 async def preview(rows: int):
     """ Get preview of dataset : Input number of preview rows as integer"""
