@@ -7,7 +7,7 @@
 ### Certification FullStack Data Scientist
 
 EMail : swellisgood@gmail.com  
-Vidyard Link : [#]()
+Vidyard Link : [#](https://share.vidyard.com/watch/RrbJR2GBKNK2MGXuoqjyA6?)
 
 # Get-Around
 
